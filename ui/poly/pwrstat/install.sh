@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
 
+xname="pwrstatd"
 go build -trimpath -ldflags="-s -w" .
-mv upstatd ~/polybar
-printf "\x1b[32minstalled upstatd\x1b[0m"
+mv $xname ~/polybar
+printf "\x1b[32minstalled $xname\x1b[0m"

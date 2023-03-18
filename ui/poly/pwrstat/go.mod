@@ -1,3 +1,3 @@
-module upstatd
+module pwrstatd
 
 go 1.19

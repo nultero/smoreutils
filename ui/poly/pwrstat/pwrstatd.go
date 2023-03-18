@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"os"
+	"polylib"
 	"strconv"
 	"time"
 )
@@ -24,19 +25,19 @@ var (
 func getPercent(buf []byte, fd *os.File) (float64, error) {
 	_, err := fd.Seek(0, 0)
 	if err != nil {
-		polyerr(err)
+		polylib.Polyerr(err)
 		return 0.0, err
 	}
 
 	n, err := fd.Read(buf)
 	if err != nil {
-		polyerr(err)
+		polylib.Polyerr(err)
 		return 0.0, err
 	}
 	s := string(buf[:n-1]) //slice off newline
 	f, err := strconv.ParseFloat(s, 64)
 	if err != nil {
-		polyerr(err)
+		polylib.Polyerr(err)
 	}
 	return f, err
 }
@@ -46,13 +47,13 @@ func main() {
 
 	enowf, err := os.Open(engNow)
 	if err != nil {
-		polyerr(err)
+		polylib.Polyerr(err)
 		fmt.Print("\n")
 		os.Exit(1)
 	}
 	efulf, err := os.Open(engNow)
 	if err != nil {
-		polyerr(err)
+		polylib.Polyerr(err)
 		fmt.Print("\n")
 		os.Exit(1)
 	}
@@ -70,18 +71,18 @@ func main() {
 			goto endOfLoop
 		}
 
-		polyfmt("BAT ", textMagenta)
+		polylib.Polyfmt("BAT ", textMagenta)
 
 		batPc = (enow / eful) * 100.0
 
 		if batPc > max {
-			polyfmt(lightningBolt, lightningGreen)
+			polylib.Polyfmt(lightningBolt, lightningGreen)
 			goto endOfLoop
 		}
 
 		for i := 0; i < 6; i++ {
 			if batPc > thresholds[i] {
-				polyfmt(batChars[i], lightningGreen)
+				polylib.Polyfmt(batChars[i], lightningGreen)
 				break
 			}
 		}

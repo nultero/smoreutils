@@ -1,5 +1,5 @@
 # smoreutils
 
-[smores](.junk/smores.jpg)
+![smores](.junk/smores.jpg)
 userland utils + dotfiles
 

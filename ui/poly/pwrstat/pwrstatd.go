@@ -51,7 +51,7 @@ func main() {
 		fmt.Print("\n")
 		os.Exit(1)
 	}
-	efulf, err := os.Open(engNow)
+	efulf, err := os.Open(engFul)
 	if err != nil {
 		polylib.Polyerr(err)
 		fmt.Print("\n")
@@ -82,6 +82,7 @@ func main() {
 
 		for i := 0; i < 6; i++ {
 			if batPc > thresholds[i] {
+				fmt.Printf("%.0f%% ", batPc)
 				polylib.Polyfmt(batChars[i], lightningGreen)
 				break
 			}

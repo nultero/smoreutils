@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"os"
 	"polylib"
+	"strings"
 	"time"
 
 	"github.com/fsnotify/fsnotify"
@@ -53,17 +54,20 @@ func watchUpdate(w *fsnotify.Watcher, fpath string) {
 func isUpdated(fpath string) bool {
 	now := time.Now()
 	mon := now.Month().String()[:3]
-	currDate := fmt.Sprintf("%d %s %d", now.Year(), mon, now.Day())
+	day := now.Day()
+	zpad := ""
+	if day < 10 {
+		zpad = "0"
+	}
+	currDate := fmt.Sprintf("%d %s %s%d", now.Year(), mon, zpad, now.Day())
 
 	bytes, err := os.ReadFile(fpath)
 	if err != nil {
 		polylib.Polyerr(err)
 	}
+	lines := strings.Split(string(bytes), "\n")
 
-	prev := string(bytes)
-	prev = prev[:len(prev)-1] //slice off newline
-
-	if currDate != prev {
+	if currDate != lines[0] {
 		return false
 	}
 

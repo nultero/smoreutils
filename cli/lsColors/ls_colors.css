@@ -1,0 +1,10 @@
+/* dir */
+.di {
+    color: rgb(180, 10, 108);
+}
+
+/* executables (anything chmod +x'd, even scripts) */
+.ex {
+    color: rgb(213, 236, 2);
+    background-color: rgb(21, 24, 0);
+}

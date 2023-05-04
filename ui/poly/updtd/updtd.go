@@ -55,23 +55,14 @@ func isUpdated(fpath string) bool {
 	now := time.Now()
 	mon := now.Month().String()[:3]
 	day := now.Day()
-	zpad := ""
-	if day < 10 {
-		zpad = "0"
-	}
-	currDate := fmt.Sprintf("%d %s %s%d", now.Year(), mon, zpad, now.Day())
+	currDate := fmt.Sprintf("%d %s %d", now.Year(), mon, day)
 
 	bytes, err := os.ReadFile(fpath)
 	if err != nil {
 		polylib.Polyerr(err)
 	}
 	lines := strings.Split(string(bytes), "\n")
-
-	if currDate != lines[0] {
-		return false
-	}
-
-	return true
+	return currDate == lines[0]
 }
 
 func eternalSleep(fpath string) {
